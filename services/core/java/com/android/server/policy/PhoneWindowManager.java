@@ -657,6 +657,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     private boolean mGlobalActionsOnLockEnable = true;
 
+    // Gesture key handler.
+    private KeyHandler mKeyHandler;
+
     // Fallback actions by key code.
     private final SparseArray<KeyCharacterMap.FallbackAction> mFallbackActions =
             new SparseArray<KeyCharacterMap.FallbackAction>();
@@ -2379,6 +2382,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         initKeyCombinationRules();
         initSingleKeyGestureRules();
         mSideFpsEventHandler = new SideFpsEventHandler(mContext, mHandler, mPowerManager);
+        boolean enableKeyHandler = mContext.getResources().
+                getBoolean(com.android.internal.R.bool.config_enableKeyHandler);
+        if (enableKeyHandler) {
+            mKeyHandler = new KeyHandler(mContext);
+        }
     }
 
     private void initKeyCombinationRules() {
@@ -4209,6 +4217,15 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     + " policyFlags=" + Integer.toHexString(policyFlags));
         }
 
+        /**
+         * Handle gestures input earlier then anything when screen is off.
+         */
+        if (!interactive) {
+            if (mKeyHandler != null && mKeyHandler.handleKeyEvent(event)) {
+                return 0;
+            }
+        }
+
         // Basic policy based on interactive state.
         int result;
         if (interactive || (isInjected && !isWakeKey)) {
@@ -4519,7 +4536,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
             case KeyEvent.KEYCODE_WAKEUP: {
                 result &= ~ACTION_PASS_TO_USER;
-                isWakeKey = true;
+                isWakeKey = false;  // We handle this in KeyHandler
                 break;
             }
 
@@ -5632,6 +5649,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
         mAutofillManagerInternal = LocalServices.getService(AutofillManagerInternal.class);
         mGestureLauncherService = LocalServices.getService(GestureLauncherService.class);
+        if (mKeyHandler != null) {
+            mKeyHandler.systemReady();
+        }
     }
 
     /** {@inheritDoc} */

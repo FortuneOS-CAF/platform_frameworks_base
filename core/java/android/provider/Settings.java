@@ -5816,12 +5816,6 @@ public final class Settings {
         public static final String VOLBTN_MUSIC_CONTROLS = "volbtn_music_controls";
 
         /**
-         * Enable/disable Bluetooth Battery bar
-         * @hide
-         */
-        public static final String BLUETOOTH_SHOW_BATTERY = "bluetooth_show_battery";
-
-        /**
          * Whether to use the custom quick unlock screen control
          * @hide
          */

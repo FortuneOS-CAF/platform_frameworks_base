@@ -5939,6 +5939,12 @@ public final class Settings {
         public static final String ADVANCED_REBOOT = "advanced_reboot";
 
         /**
+         * Whether to toogle customization summary in Dashboard
+         * @hide
+         */
+        public static final String CUSTOMIZATION_SUMMARY = "customization_summary";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *

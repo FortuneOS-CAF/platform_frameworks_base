@@ -292,6 +292,7 @@ import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.WindowManagerGlobalLock;
 import com.android.server.wm.WindowManagerService;
 import com.android.server.lineage.health.HealthInterfaceService;
+import com.libremobileos.server.display.LMOFreeformSystemService;
 
 import dalvik.system.VMRuntime;
 import dalvik.system.PathClassLoader;
@@ -1740,6 +1741,10 @@ public final class SystemServer implements Dumpable {
 
             t.traceBegin("StartPowerOffAlarmService");
             mSystemServiceManager.startService(PowerOffAlarmService.class);
+            t.traceEnd();
+
+            t.traceBegin("LMOFreeformSystemService");
+            mSystemServiceManager.startService(LMOFreeformSystemService.class);
             t.traceEnd();
 
         } catch (Throwable e) {

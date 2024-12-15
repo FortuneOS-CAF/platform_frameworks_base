@@ -223,7 +223,7 @@ public class KeyguardPatternViewController
     @Override
     protected void onViewAttached() {
         super.onViewAttached();
-        int userId = KeyguardUpdateMonitor.getCurrentUser();
+        int userId = mSelectedUserInteractor.getSelectedUserId();
         mLockPatternView.setOnPatternListener(new UnlockPatternListener());
         mLockPatternView.setSaveEnabled(false);
         mLockPatternView.setInStealthMode(!mLockPatternUtils.isVisiblePatternEnabled(

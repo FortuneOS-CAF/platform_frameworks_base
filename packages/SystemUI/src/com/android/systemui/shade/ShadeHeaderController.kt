@@ -69,6 +69,7 @@ import com.android.systemui.statusbar.phone.ui.StatusBarIconController
 import com.android.systemui.statusbar.phone.ui.TintedIconManager
 import com.android.systemui.statusbar.policy.Clock
 import com.android.systemui.statusbar.policy.ConfigurationController
+import com.android.systemui.statusbar.policy.NetworkTraffic
 import com.android.systemui.statusbar.policy.NextAlarmController
 import com.android.systemui.statusbar.policy.VariableDateView
 import com.android.systemui.statusbar.policy.VariableDateViewController
@@ -143,6 +144,7 @@ constructor(
     private val mShadeCarrierGroup: ShadeCarrierGroup = header.requireViewById(R.id.carrier_group)
     private val systemIconsHoverContainer: View =
         header.requireViewById(R.id.hover_system_icons_container)
+    private val networkTraffic: NetworkTraffic = header.requireViewById(R.id.networkTraffic)
 
     private var sbPaddingLeft = 0
     private var sbPaddingRight = 0
@@ -153,6 +155,7 @@ constructor(
     private var textColorPrimary = Color.TRANSPARENT
 
     private var qsDisabled = false
+    private var privacyVisible = false
     private var visible = false
         set(value) {
             if (field == value) {
@@ -254,6 +257,8 @@ constructor(
                 val update =
                     combinedShadeHeadersConstraintManager.privacyChipVisibilityConstraints(visible)
                 header.updateAllConstraints(update)
+                setNetworkTrafficVisible(qsExpandedFraction == 1f && !visible)
+                privacyVisible = visible
             }
         }
 
@@ -343,6 +348,8 @@ constructor(
             shadeCarrierGroupControllerBuilder.setShadeCarrierGroup(mShadeCarrierGroup).build()
 
         privacyIconsController.onParentVisible()
+
+        setNetworkTrafficVisible(false)
     }
 
     override fun onViewAttached() {
@@ -369,6 +376,7 @@ constructor(
             statusOverlayHoverListenerFactory.createListener(systemIconsHoverContainer)
         )
         updateResources()
+        privacyVisible = privacyIconsController.getIsChipVisible()
     }
 
     override fun onViewDetached() {
@@ -537,6 +545,7 @@ constructor(
             header.progress = qsExpandedFraction
             updateBatteryMode()
         }
+        setNetworkTrafficVisible(qsExpandedFraction == 1f && !privacyVisible && visible)
     }
 
     private fun logInstantEvent(message: String) {
@@ -605,6 +614,10 @@ constructor(
             clockPaddingEnd,
             clock.paddingBottom
         )
+    }
+
+    private fun setNetworkTrafficVisible(visible: Boolean) {
+        networkTraffic.setIsObscured(!visible)
     }
 
     override fun dump(pw: PrintWriter, args: Array<out String>) {

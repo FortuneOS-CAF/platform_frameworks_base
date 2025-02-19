@@ -262,5 +262,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.NETWORK_TRAFFIC_ARROW, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.NETWORK_TRAFFIC_FONT_SIZE, NON_NEGATIVE_INTEGER_VALIDATOR);
         VALIDATORS.put(System.NETWORK_TRAFFIC_VIEW_LOCATION, new InclusiveIntegerRangeValidator(0, 2));
+        VALIDATORS.put(System.THREE_FINGER_GESTURE, BOOLEAN_VALIDATOR);
     }
 }

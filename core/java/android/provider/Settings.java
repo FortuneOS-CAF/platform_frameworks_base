@@ -6332,6 +6332,21 @@ public final class Settings {
         public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
 
         /**
+         * Three Finger Gesture from Oppo
+         * @hide
+         */
+        @Readable
+        public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
+
+        /**
+         * Three Finger Gesture - flag for activation
+         * NOT for backup!
+         * @hide
+         */
+        @Readable
+        public static final String THREE_FINGER_GESTURE_ACTIVE = "three_finger_gesture_active";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate

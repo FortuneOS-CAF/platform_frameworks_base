@@ -6299,12 +6299,6 @@ public final class Settings {
          */
 
         /**
-         * Controls whether double tap to sleep is enabled (on lockscreen/homescreen).
-         * @hide
-         */
-        public static final String GESTURE_DOUBLE_TAP_SLEEP = "gesture_double_tap_sleep";
-
-        /**
          * Whether to show network traffic indicator in statusbar
          * @hide
          */

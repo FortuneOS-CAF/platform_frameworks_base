@@ -43,11 +43,10 @@
     </com.android.keyguard.AlphaOptimizedLinearLayout>
 
     <com.android.systemui.statusbar.phone.StatusIconContainer android:id="@+id/statusIcons"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingEnd="@dimen/signal_cluster_battery_padding"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|end"
         android:orientation="horizontal"/>
 
     <!-- PaddingEnd is added to balance hover padding, compensating for paddingStart in statusIcons.

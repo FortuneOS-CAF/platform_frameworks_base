@@ -28,12 +28,6 @@
     <string-array name="config_deviceKeyHandlerClasses" translatable="false">
     </string-array>
 
-    <!-- Should we listen for fingerprints when the screen is off?  Devices
-         with a rear-mounted sensor want this, but certain devices have
-         the sensor embedded in the power key and listening all the time
-         causes a poor experience. -->
-    <bool name="config_fingerprintWakeAndUnlock">true</bool>
-
     <!-- Defines the sysfs attribute path used by the device
          to enable/disable DC dimming. -->
     <string name="config_deviceDcDimmingSysfsNode"></string>

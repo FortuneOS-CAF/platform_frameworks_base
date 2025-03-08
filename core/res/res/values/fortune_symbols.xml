@@ -24,12 +24,6 @@
     <java-symbol type="string" name="url_copy_success" />
     <java-symbol type="string" name="url_copy_failed" />
 
-    <!-- Should we listen for fingerprints when the screen is off?  Devices
-         with a rear-mounted sensor want this, but certain devices have
-         the sensor embedded in the power key and listening all the time
-         causes a poor experience. -->
-    <java-symbol type="bool" name="config_fingerprintWakeAndUnlock" />
-
     <!-- DC Dimming -->
     <java-symbol type="string" name="config_deviceDcDimmingSysfsNode" />
     <java-symbol type="string" name="config_deviceDcDimmingEnableValue" />
